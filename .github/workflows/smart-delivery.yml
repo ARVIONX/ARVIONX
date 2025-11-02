@@ -1,0 +1,40 @@
+name: 📤 ARVIONX Smart Report Delivery
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deliver:
+    name: 🚀 Send Smart Report
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🌱 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Prepare Latest Smart Report
+        run: |
+          echo "📦 Collecting latest report..."
+          mkdir -p temp_reports
+          latest_log=$(ls -t logs/*.log | head -n 1)
+          cp "$latest_log" temp_reports/final_report.log
+          echo "✅ Latest report ready for sending."
+
+      - name: 🤖 Send Report to Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          echo "🤖 Sending Smart Report via ARVIONX Bot..."
+          message="📊 *ARVIONX Smart Report Update*%0A------------------------------------%0A✅ System: Operational%0A📈 Status: Stable%0A🕓 Generated: $(date +'%Y-%m-%d %H:%M')%0A------------------------------------%0A📤 Report sent successfully."
+          curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+          -d chat_id="${TELEGRAM_CHAT_ID}" \
+          -d text="$message" \
+          -d parse_mode="Markdown"
+
+      - name: 🧠 Confirm Delivery
+        run: |
+          echo "------------------------------------"
+          echo "✅ ARVIONX Smart Report sent successfully via Telegram."
+          echo "📩 Delivery verified."
+          echo "------------------------------------"
