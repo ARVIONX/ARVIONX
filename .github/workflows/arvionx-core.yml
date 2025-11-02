@@ -1,0 +1,30 @@
+name: 🧠 ARVIONX Core System
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  initialize:
+    name: 🚀 Initialize ARVIONX Core
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧩 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: ⚙️ System Setup
+        run: |
+          echo "Initializing ARVIONX Core Framework..."
+          echo "✅ Brand: ARVIONX"
+          echo "💎 Slogan: We don’t follow the market... we define it."
+          echo "🌐 Website: https://arvionx.com"
+          echo "📍 Headquarters: Riyadh, Saudi Arabia"
+          echo "System initialization complete ✅"
+
+      - name: 🧠 Verify Core Structure
+        run: |
+          echo "Checking structure..."
+          ls -R
+          echo "All ARVIONX core directories verified successfully."
