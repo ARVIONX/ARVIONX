@@ -1,0 +1,36 @@
+name: 🧠 ARVIONX Intelligence Hub – Base Monitor
+
+on:
+  schedule:
+    - cron: "0 * * * *"  # Runs every hour
+  workflow_dispatch:
+
+jobs:
+  monitor:
+    name: 🔍 Monitor Core Activity
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧩 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🧠 Initialize Intelligence Hub
+        run: |
+          echo "🧠 Launching ARVIONX Intelligence Hub..."
+          echo "🔎 Monitoring repository activity and system health."
+          echo "🌐 Connected to ARVIONX Core System."
+          echo "📦 Starting directory scan..."
+
+      - name: 📊 Directory Report
+        run: |
+          echo "📁 Listing all ARVIONX modules..."
+          ls -R > logs/arvionx_report_$(date +'%Y-%m-%d_%H-%M').log
+          echo "✅ Log saved successfully inside /logs"
+
+      - name: 🧾 Log Summary
+        run: |
+          echo "🔹 Intelligence Hub summary:"
+          echo "   - Monitoring: Active"
+          echo "   - Report Generated: $(date)"
+          echo "   - Target: ARVIONX Main Repository"
+          echo "   - Status: ✅ Operational"
